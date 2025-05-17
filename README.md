@@ -1,5 +1,10 @@
 # Kernels from Scratch
 
+Implements & explains a kernel, **assuming you know absolutely nothing.**
+
+Enjoy!
+
+---
 **Kernel**: the kernel is the core part of your operating system (OS) that sits between your computer's hardware and all other software (like apps or the user interface).
 
 - It abstracts hardware differences, giving software a consistent, standardized environment to run on.
