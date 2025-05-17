@@ -16,7 +16,8 @@ Similarly, the kernel ensures that software can access and use hardware resource
 
 ### Pointers and references (C++):
 
-- **Reference**: an alias for an existing object. Is essentially identical to the object being referenced.
+#### **Reference**: 
+an alias for an existing object. Is essentially identical to the object being referenced.
 
    - It does **not** store its own value or memory address. It directly refers to another variable's address in memory.
 
@@ -65,14 +66,120 @@ The & symbol tends to cause confusion because it has different meanings dependin
 
 
 <br>
-TODO: Fix this
-[See code here](Fundamentals/reference.cpp)
 
-<br><br>
+[See code here](./Fundamentals/C++/reference.cpp)
 
 
-- **Pointer**: tells us the address (in memory) of the object that the pointer is pointing to
+---
 
+#### Dereference operator (*)
+
+Returns the value at a given memory address.
+
+For example,
+
+```
+int main(){
+   int x = 5;
+   std::cout << x;      // print the value
+   std::cout << &x;     // print the memory address
+
+   std::cout << *(&x);     // // print the value at the memory address
+
+   return 0;
+}
+```
+
+* and & essentially cancel each other out.
+
+
+---
+
+#### **Pointer** (type*): 
+**object that holds a *memory address* of a variable.**
+
+```
+int;     // a normal int
+int&;    // a reference to an int value
+int*;    // a pointer to an int value
+```
+
+It is best practice to always initialize your pointers. 
+
+Once we have a pointer holding the address of another object, we can use the dereference operator (*) to access the value at that address. 
+
+For example,
+
+```
+int x = 5;
+int* ptr = &x;
+std::cout << *ptr << "\n";    // prints 5
+```
+
+
+[See code here](./Fundamentals/C++/pointer.cpp)
+
+
+**Key insight**:
+
+When we use a pointer without a dereference (`ptr`), we are accessing the address held by the pointer. Modifying this (`ptr = &y`) changes what the pointer is pointing at.
+
+When we dereference a pointer (`*ptr`), we are accessing the object being pointed at. Modifying this (`*ptr = 6;`) changes the value of the object being pointed at.
+
+## 2. Tensors
+
+Memory layout for tensors refers to how tensor data is physically arranged in computer memory. Although tensors are multi-dimensional arrays, computer memory is linear (one-dimensional).
+
+The memory layout is the mapping that determines how the multi-dimensional tensor indices translate to positions in linear memory.
+
+##### Contiguous Memory
+A tensor is stored contiguously when **all its elements are stored in a single, uninterrupted block of memory without gaps**.
+
+![Contiguous Memory](./assets/contiguous_memory.png)
+
+*shows a process requiring 3 memory blocks, being placed into a single continuous section of free memory in RAM.*
+
+##### Strides
+
+Take this piece of code:
+
+```
+# strides
+x = np.array([[1,2,3], 
+              [4,5,6]], 
+              dtype=np.int32)
+
+print(x.strides)        # bytes to step in each dimension
+```
+
+The output is (12, 4).
+
+Each element’s size in memory = number of bytes needed to store its value. <br>
+`dtype=np.int32` means each element is a **32-bit** integer → **4 bytes** <br>
+(32 bits ÷ 8 bits per byte = 4 bytes)
+
+- First number (12) → # of bytes to move **to the next row** (axis 0)
+    - each row has 3 elements x 4 bytes = 12 bytes
+- Second number (4) → bytes to move **to the next column** (axis 1)
+    - each step within a row moves by 1 element → 4 bytes
+
+![Strides](./assets/strides.png)
+*another example in int64*
+
+##### Intuition:
+
+Think of the array as **flattened memory**:
+
+`[1, 2, 3, 4, 5, 6]  ← all stored in a contiguous memory block`
+
+- from `1 → 2` → +4 bytes (column move)
+- from `1 → 4` → +12 bytes (row move)
+
+
+
+
+
+[See code here](./Fundamentals/Numpy/essentials.ipynb)
 
 
 <br>
