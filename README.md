@@ -3,7 +3,7 @@
 Implements & explains a kernel, **assuming you know absolutely nothing.** 
 
 Enjoy!
-1. [What is a Kernel?](#kernel)
+1. [What is a Kernel?](#1-kernel)
 2. [Fundamentals & Memory Management](#1-fundamentals--memory-management)
 
 
