@@ -1,11 +1,18 @@
 # Kernels from Scratch
 
-Implements & explains a kernel, **assuming you know absolutely nothing.**
+Implements & explains a kernel, **assuming you know absolutely nothing.** 
 
 Enjoy!
+1. [What is a Kernel?](#kernel)
+2. [Pointers and References (C++)](#pointers-and-references-c)
+3. [Reference](#reference)
+4. [Pointer (type*)](#pointer-type)
+5. [Contiguous Memory](#contiguous-memory)
+6. [Strides](#strides)
 
----
-**Kernel**: the kernel is the core part of your operating system (OS) that sits between your computer's hardware and all other software (like apps or the user interface).
+
+### Kernel
+The kernel is the core part of your operating system (OS) that sits between your computer's hardware and all other software (like apps or the user interface).
 
 - It abstracts hardware differences, giving software a consistent, standardized environment to run on.
 
