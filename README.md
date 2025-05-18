@@ -137,6 +137,12 @@ When we dereference a pointer (`*ptr`), we are accessing the object being pointe
 
 ## 2. Tensors
 
+In tensor kernel development, you'll often use pointer arithmetic to:
+
+- Navigate through memory: Moving through tensor data efficiently
+- Implement strided access: Efficiently accessing non-contiguous elements
+- Handle different memory layouts: Working with row-major vs column-major data
+
 Memory layout for tensors refers to how tensor data is physically arranged in computer memory. Although tensors are multi-dimensional arrays, computer memory is linear (one-dimensional).
 
 The memory layout is the mapping that determines how the multi-dimensional tensor indices translate to positions in linear memory.
@@ -184,12 +190,23 @@ Think of the array as **flattened memory**:
 - from `1 → 2` → +4 bytes (column move)
 - from `1 → 4` → +12 bytes (row move)
 
-
-
-
-
 [See code here](./Fundamentals/Numpy/essentials.ipynb)
 
+
+## 3. Stack vs. heap allocation
+
+##### The heap
+
+The heap segment (also known as the *"free store"*) keeps track of memory used for dynamic allocation.
+
+When a dynamically allocated variable is deleted, the memory is “returned” to the heap and can then be reassigned as future allocation requests are received. Remember that deleting a pointer does not delete the variable, it just returns the memory at the associated address back to the operating system.
+
+
+##### The (call) stack
+
+The call stack keeps track of all the active functions (those that have been called but have not yet terminated) from the start of the program to the current point of execution, and handles allocation of all function parameters and local variables.
+
+Functions are **pushed** on the stack when they are **called**, and **popped** when they **return**/finish.
 
 <br>
 
