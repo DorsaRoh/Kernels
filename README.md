@@ -208,7 +208,82 @@ The call stack keeps track of all the active functions (those that have been cal
 
 Functions are **pushed** on the stack when they are **called**, and **popped** when they **return**/finish.
 
+
+## Stack & heap in python memory management
+
+Memory in python is divided into two ideas: Stack memory and Heap memory.
+
+
+![Python Memory Management](./assets/python_mm.png)
+
+- Methods are executed in Stack memory. By default, the program executes `main()`
+- **Objects** are created in Heap
+- **References** are created in Stack
+
+- Once a function returns/finishes, it's place in Stack memory is deleted
+
+
 <br>
+
+
+
+## Extra (Python) knowledge:
+
+- *Differentiate between Deep and Shallow Copies*
+
+A shallow copy creates a new object but inserts references to the original elements. Changes in nested objects affect both copies.
+
+`copy.copy(object)`
+
+A deep copy creates a new object and recursively copies all nested objects. Changes in nested objects are independent.
+
+`copy.deepcopy(object)`
+
+For example,
+
+```
+import copy
+
+original = [[1,2], [3,4]]
+shallow = copy.copy(original)
+
+shallow[0][0] = 999
+
+print(original) # [[999, 2], [3, 4]]
+print(shallow) # [[999, 2], [3, 4]]
+```
+
+`shallow` and `original` are different outer lists. But the inner lists (`[1,2]`, `[3, 4]`) are shared. So when we changed `shallow[0][0]`, it also changed in original.
+
+
+```
+original = [[1, 2], [3, 4]]
+deep = copy.deepcopy(original)
+
+deep[0][0] = 999
+
+print(original)  # [[1, 2], [3, 4]]
+print(deep)      # [[999, 2], [3, 4]]
+```
+
+`deepcopy` copied everything, including inner lists. So `original` and `deep` are now completely independent. Changing `deep` has no effect on `original`.
+
+In summary, a shallow copy creates a **new outer object but reuses the inner (nested) objects**, so changes to nested parts affect both. For example, if you change the outer variable `1` in `shallow = [1, [2,3]]`, it **WON'T** change `original`. but if you change 2 or 3, it will. 
+
+A deep copy creates a **new outer object and recursively copies all nested objects**, so changes are completely independent.
+
+<br>
+
+- *Differentiate between List and Tuple*
+
+A list is mutable (can change after initialized) ex. `[1,2,3]`, while a tuple is immutable (cannot change once initialized) ex. `(1, 2, 3)`.
+
+<br>
+
+
+
+
+<br><br>
 
 **Additional resources:**
 - [What is the Difference Between a Pointer and a Reference C++](https://www.youtube.com/watch?v=sxHng1iufQE&ab_channel=PaulProgramming)
